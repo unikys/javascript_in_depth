@@ -1,0 +1,17 @@
+<script>
+
+var color1 = new String("red");
+var color2 = "red";
+var color3 = String("red");
+
+console.log(color1 instanceof String); // === true
+console.log(color2 instanceof String); // === false
+console.log(color3 instanceof String); // === false
+
+console.log(typeof color1); // === "object"
+console.log(typeof color2); // === "string"
+console.log(typeof color3); // === "string"
+
+console.log(color3 === color2); // === true
+
+</script>

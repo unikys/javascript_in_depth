@@ -1,0 +1,17 @@
+<script>
+
+(function () {
+    var xhr, i;
+    for (i = 0 ; i < 10 ; i++) {
+        xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://unikys.tistory.com/" + i);
+        xhr.onload = function () {
+            var json = JSON.parse(xhr.responseText);
+            for (i = 0 ; i < 5 ; i++) {
+                alert(i + " = " + json[i]);
+            }
+        };
+    }
+}());
+
+</script>

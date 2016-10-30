@@ -1,0 +1,13 @@
+<script>
+function Person(name, blog) {
+    this.name = name;
+    this.blog = blog;
+}
+
+var unikys = new Person("unikys", "http://unikys.tistory.com");
+
+console.log(unikys instanceof Person); // === true
+console.log(unikys instanceof Object); // === true
+console.log(typeof unikys); // === "object"
+
+</script>

@@ -1,0 +1,10 @@
+<script>
+var myVariable = "This is a string variable";
+
+if (typeof myVariable === "function") {
+    alert("Variable is function");
+    myVariable.call(this);
+} else if (typeof myVariable === "string") {
+    alert("Variable is string: " + myVariable);
+}
+</script>

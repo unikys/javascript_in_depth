@@ -1,0 +1,12 @@
+<script>
+
+console.log("1: " + varExists + " , " + window.hasOwnProperty("varExists"));
+var varExists = "Define a global variable with var keyword";
+console.log("2: " + varExists);
+
+console.log("Exists?: " + window.hasOwnProperty("noVar"));
+console.log("1: " + noVar);
+noVar = "Define a global variable without var keyword";
+console.log("2: " + noVar);
+
+</script>

@@ -1,0 +1,15 @@
+<html>
+<body>
+    <div id="div">Global event handler example</div>
+    <button id="button">Click</button>
+    <script>
+    var element = document.getElementById("div"),
+        button = document.getElementById("button"),
+
+    insertHTML = "<b>Hello world</b>";
+    button.onclick = function () {
+        element.innerHTML = insertHTML;
+    };
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<html>
+<body>
+    <form id="formWrite">
+        <input type="text" id="name" name="name"/>
+        <input type="text" id="age" name="age"/>
+        <input type="submit" value="Submit"/>
+    </form>
+
+    <script>
+    (function () {
+        var formWrite = document.getElementById("formWrite");
+        formWrite.onsubmit = validate;
+        function validate() {
+            var inputName = document.getElementById("name"),
+                inputAge;
+
+            if (inputName.value === "") {
+                alert("Input name");
+                inputName.focus();
+                return false;
+            }
+
+            inputAge = document.getElementById("age");
+            if (inputAge.value === "") {
+                alert("Input age"); inputAge.focus(); return false;
+            }
+        }
+    }());
+    </script>
+</body>
+</html>

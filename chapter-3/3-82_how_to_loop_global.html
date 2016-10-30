@@ -1,0 +1,34 @@
+
+<script>
+
+// Naive way
+var button1 = document.getElementById("button1");
+button1.dosomething = "Do something same with many buttons, clicked button1";
+
+var button2 = document.getElementById("button2");
+button2.dosomething = "Do something same with many buttons, clicked button2";
+
+var button3 = document.getElementById("button3");
+button3.dosomething = "Do something same with many buttons, clicked button3";
+
+var button4 = document.getElementById("button4");
+button4.dosomething = "Do something same with many buttons, clicked button4";
+
+
+// Using loop with eval
+var i;
+for (i = 0 ; i < 4 ; i++) {
+    eval("var button" + i + " = document.getElementById('button" + i + "');";
+    eval("button" + i + ".dosomething = 'Do something same with eval, clicked button" + i + "';");
+}
+
+
+// Using loop with window
+var i;
+for (i = 0 ; i < 4 ; i++) {
+    window["button" + i] = document.getElementById("button" + i);
+    window["button" + i].dosomething = "Do something same without eval, clicked button" + i;
+}
+
+</script>
+

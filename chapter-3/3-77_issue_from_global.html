@@ -1,0 +1,16 @@
+<script>
+function addOneToTen() {
+    sum = 0;
+    for (i = 1 ; i < 11 ; i++) {
+        sum = sum + i;
+    }
+    return sum;
+}
+
+sum = 0;
+for (i = 0 ; i < 10 ; i++) {
+    sum = sum + addOneToTen();
+}
+console.log(sum);
+
+</script>

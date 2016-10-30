@@ -1,0 +1,16 @@
+<script>
+
+var xhr = new XMLHttpRequest();
+document.getElementById("buttonCheckId").addEventListener("click", function () {
+    var id = document.getElementById("inputId").value;
+    xhr.open("GET", "http://unikys.tistory.com/api/checkId?id=" + id);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyStatus === 4 && xhr.status === 200) {
+            if (xhr.responseText === "1") {
+                alert("ID exists!");
+            }
+        }
+    };
+});
+
+</script>

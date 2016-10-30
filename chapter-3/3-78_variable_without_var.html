@@ -1,0 +1,19 @@
+<script>
+
+var getVariable = "global";
+
+(function () {
+    var getVariable = "immediate function";
+    insideFunction();
+
+    console.log("2. Immediate function: " + getVariable);
+
+    function insideFunction() {
+        console.log("1. Inside function: " + getVariable);
+        getVariable = "will I be global?";
+    }
+}());
+
+console.log("3. Global: " + getVariable);
+
+</script>

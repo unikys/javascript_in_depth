@@ -1,0 +1,19 @@
+<script>
+
+(function () {
+    var window = {
+        popup: function () {
+            window.open("http://unikys.tistory.com");
+        },
+        alert: function () {
+            alert("I'm not the true alert!");
+        },
+        open: function (url) {
+            alert("I know where you are going... " + url);
+        }
+    };
+    window.alert();
+    window.popup();
+}());
+
+</script>
