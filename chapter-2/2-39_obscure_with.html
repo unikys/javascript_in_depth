@@ -1,0 +1,11 @@
+<script>
+function doSomething(value, obj) {
+    with (obj) {
+        console.log(value);
+        value = "which scope is this?";
+    }
+}
+
+doSomething("value", {"value": "objValue"});
+doSomething("value", {});
+</script>

@@ -1,0 +1,16 @@
+<script>
+var user = {
+    name: "Sung-ihk",
+    homepage: "unikys.tistory.com",
+    language: "Korean"
+}
+with (user) {
+    console.log(name === "Sung-ihk");
+    console.log(homepage === "unikys.tistory.com");
+    console.log(language === "Korean");
+    language = "javascript";
+    nickname = "unikys";
+}
+console.log(user.language === "javascript");
+console.log(user.nickname === "unikys"); //??
+</script>

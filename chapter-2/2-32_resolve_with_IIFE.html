@@ -1,0 +1,18 @@
+<html>
+<body>
+<div id="divScope0">Click me! DIV 0</div>
+<div id="divScope1">Click me! DIV 1</div>
+<div id="divScope2">Click me! DIV 2</div>
+<script>
+var i, len = 3;
+for (i = 0; i < len; i++) {
+    document.getElementById("divScope" + i).addEventListener(
+        "click",
+        (function (index) { return function () {
+            alert("You clicked div #" + index); };
+        }(i)),
+        false);
+}
+</script>
+</body>
+</html>

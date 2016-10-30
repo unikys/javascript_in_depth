@@ -1,0 +1,48 @@
+<html>
+<body>
+    <div id="wrapper">
+        <button data-cb="1">Add div</button>
+        <button data-cb="2">Add img</button>
+        <button data-cb="delete">Clear</button>
+        Adding below...<br/>
+        <div id="appendDiv"></div>
+    </div>
+
+    <script>
+    (function () {
+        var appendDiv = document.getElementById("appendDiv");
+        document.getElementById("wrapper").addEventListener("click", append);
+
+        function append(e) {
+            var target = e.target || e.srcElement || event.srcElement;
+            var callbackFunction = callback[target.getAttribute("data-cb")];
+
+            appendDiv.appendChild(callbackFunction());
+        };
+
+        var callback = { 
+            "1": (function () {
+                var div = document.createElement("div");
+
+                div.innerHTML = "Adding new div";
+                return function () {
+                    return div.cloneNode(true);
+                }
+            }()), 
+            "2": (function () {
+                var img = document.createElement("img");
+
+                img.src="http://cfile9.uf.tistory.com/image/011F554E50FD140F2B27CA";
+                return function () {
+                    return img.cloneNode(true);
+                }
+            }()),
+            "delete":function () {
+                appendDiv.innerHTML = "";
+                return document.createTextNode("Cleared");
+            }
+        };
+    }());
+    </script>
+</body>
+</html>
