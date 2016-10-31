@@ -1,0 +1,100 @@
+
+<html>
+<head>
+<style>
+    div {
+        border: 1px solid black;
+    }
+    .divOutside {
+        width: 200px;
+        height: 200px;
+        background-color: lightgreen;
+    }
+    .divMiddle {
+        width: 150px;
+        height: 150px;
+        background-color: lightblue;
+    }
+    .divInside {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        position:relative;
+    }
+    .divFloat {
+        position: absolute;
+        left: 210px;
+        height: 50px;
+        width: 50px;
+        background-color: lightgray;
+    }
+    .highlight {
+        background-color: black;
+    }
+    </style>
+</head>
+<body>
+    <div id="divBubblingOutside" class="divOutside">
+        <div id="divBubblingMiddle" class="divMiddle">
+            <div id="divBubblingInside" class="divInside">
+                Bubbling
+                <div id="divBubblingFloat" class="divFloat"> </div>
+            </div>
+        </div>
+    </div>
+    <div id="divCapturingOutside" class="divOutside">
+        <div id="divCapturingMiddle" class="divMiddle">
+            <div id="divCapturingInside" class="divInside">
+                Capturing
+                <div id="divCapturingFloat" class="divFloat"> </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    (function () {
+        document.getElementById("divBubblingOutside").addEventListener('click', function () {
+            this.classList.toggle("highlight"); // Some browsers will not apply this change due to single threaded environment
+            alert("Outside bubbling");
+            this.classList.toggle("highlight");
+        });
+        document.getElementById("divBubblingMiddle").addEventListener('click', function () {
+            this.classList.toggle("highlight");
+            alert("Middle bubbling");
+            this.classList.toggle("highlight");
+        });
+        document.getElementById("divBubblingInside").addEventListener('click', function () {
+            this.classList.toggle("highlight");
+            alert("Inside bubbling");
+            this.classList.toggle("highlight");
+        });
+        document.getElementById("divBubblingFloat").addEventListener('click', function () {
+            this.classList.toggle("highlight");
+            alert("Float bubbling");
+            this.classList.toggle("highlight");
+        });
+        document.getElementById("divCapturingOutside").addEventListener('click', function () {
+            this.classList.toggle("highlight");
+            alert("Outside capturing");
+            this.classList.toggle("highlight");
+        }, true);
+        document.getElementById("divCapturingMiddle").addEventListener('click', function () {
+            this.classList.toggle("highlight");
+            document.getElementById("divCapturingInside").removeChild(document.getElementById("divCapturingFloat"));
+            alert("Middle capturing");
+            this.classList.toggle("highlight");
+        }, true);
+        document.getElementById("divCapturingInside").addEventListener('click', function () {
+            this.classList.toggle("highlight");
+            alert("Inside capturing");
+            this.classList.toggle("highlight");
+        }, true);
+        document.getElementById("divCapturingFloat").addEventListener('click', function () {
+            this.classList.toggle("highlight");
+            alert("Float capturing");
+            this.classList.toggle("highlight");
+        }, true);
+    }());
+    </script>
+</body>
+</html>
+

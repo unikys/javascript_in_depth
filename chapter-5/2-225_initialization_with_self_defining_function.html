@@ -1,0 +1,66 @@
+
+<html>
+<head>
+    <style>
+    #commentWrapper {
+        width: 200px;
+    }
+    .comment {
+        width: 150px;
+        display: inline-block;
+    }
+    .name {
+        width: 40px;
+        display: inline-block;
+    }
+    </style>
+</head>
+<body>
+    <div id="commentWrapper">
+        <div>
+            <div class="comment">Comment</div>
+            <div class="name">Name</div>
+        </div>
+    </div>
+
+    <form id="formComment">
+        <label>Comment: <input type="text" id="comment"></input></label>
+        <label>Name: <input type="text" id="name"></input></label>
+        <input type="submit"></input>
+    </form>
+
+    <script>
+    (function () {
+        var addComment = function () {
+            var divCommentWrapper = document.getElementById("commentWrapper"),
+                divCommentRow = document.createElement("div"),
+                divComment = document.createElement("div"),
+                divName = document.createElement("div"),
+                inputComment = document.getElementById("comment"),
+                inputName = document.getElementById("name");
+
+            divComment.className = "comment";
+            divName.className = "name";
+            divCommentRow.appendChild(divComment);
+            divCommentRow.appendChild(divName);
+
+            addComment = function () {
+                divComment.innerHTML = inputComment.value;
+                divName.innerHTML = inputName.value;
+                inputComment.value = "";
+                inputName.value = "";
+
+                divCommentWrapper.appendChild(divCommentRow.cloneNode(true));
+            };
+            addComment();
+        };
+        document.getElementById("formComment").addEventListener("submit", function () {
+            addComment();
+            event.returnValue = false;
+            return false;
+        });
+    }());
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,74 @@
+
+<html>
+<body>
+    <video style="width:240px" id="videoBunnySmall" src="http://media.w3.org/2010/05/bunny/movie.ogv"></video>
+    <video style="width:320px" id="videoBunnyMedium" src="http://media.w3.org/2010/05/bunny/movie.ogv"></video>
+    <video style="width:480px" id="videoBunnyLarge" src="http://media.w3.org/2010/05/bunny/movie.ogv"></video>
+
+    <div id="controlPanel">
+        <select id="controlVideo">
+            <option>videoBunnySmall</option>
+            <option>videoBunnyMedium</option>
+            <option>videoBunnyLarge</option>
+        </select>
+        <button id="play">Play</button>
+        <button id="pause">Pause</button>
+        <button id="volumeUp">Volume+</button>
+        <button id="volumeDown">Volume-</button>
+    </div>
+    <script>
+    (function () {
+        var divControlPanel = document.getElementById("controlPanel"),
+            selectControlVideo = document.getElementById("controlVideo"),
+            controlVideo = {
+                "play": function (video) {
+                    video.play();
+                },
+                "pause": function (video) {
+                    video.pause();
+                },
+                "volumeUp": function (video) {
+                    if (video.volume <= 0.9) {
+                        video.volume += 0.1;
+                    } else {
+                        video.volume = 1;
+                    }
+                },
+                "volumeDown": function (video) {
+                    if (video.volume >= 0.1) {
+                        video.volume -= 0.1;
+                    } else {
+                        video.volume = 0;
+                    }
+                },
+                "getVideoById": function (id) {
+                    return document.getElementById(id);
+                }
+            },
+            proxyClickEventHandler = (function () {
+                var cache = {};
+                return function (command) {
+                    var video;
+                    if (controlVideo.hasOwnProperty(command)) {
+                        if (cache.hasOwnProperty(selectControlVideo.value)) {
+                            video = cache[selectControlVideo.value];
+                        } else {
+                            video = controlVideo.getVideoById(selectControlVideo.value);
+                            cache[selectControlVideo.value] = video;
+                        }
+                        controlVideo[command].call(this, video);
+                    }
+                };
+            }());
+
+
+        divControlPanel.addEventListener("click", function (e) {
+            var target = e.target || e.srcElement;
+            proxyClickEventHandler(target.id);
+        }, true);
+    }());
+
+    </script>
+    </body>
+</html>
+

@@ -1,0 +1,29 @@
+
+<script>
+var getXHR = function () {
+    var xhr;
+    if (window.XMLHttpRequest) {
+        getXHR = function () {
+            return new XMLHttpRequest();
+        };
+        return new XMLHttpRequest();
+    }
+    try {
+        xhr = new ActiveXObject("MSXML2.XMLHTTP.6.0");
+        getXHR = function () {
+            return new new ActiveXObject("MSXML2.XMLHTTP.6.0");
+        };
+        return xhr;
+    } catch (e) {
+        try {
+            xhr = new ActiveXObject("MSXML2.XMLHTTP.3.0");
+            getXHR = function () {
+                return new ActiveXObject("MSXML2.XMLHTTP.3.0");
+            };
+            return xhr;
+        } catch (e) {
+            alert("This browser does not support XMLHttpRequest")
+        }
+    }
+};
+</script>

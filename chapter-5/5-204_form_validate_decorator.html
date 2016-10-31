@@ -1,0 +1,91 @@
+
+<html>
+<body>
+    <form id="personalInformation">
+        <label>First name: <input type="text" class="validate" data-validate-rules="required alphabet" name="firstName"></input></label><br/>
+        <label>Last name: <input type="text" class="validate" data-validate-rules="required alphabet" name="lastName"></input></label><br/>
+        <label>Age: <input type="text" class="validate" data-validate-rules="number" name="age"></input></label><br/>
+        <label>Gender: <select class="validate" data-validate-rules="required">
+            <option>Male</option>
+            <option>Female</option>
+        </select></label><br/>
+        <input type="submit"></input>
+    </form>
+
+    <script>
+    (function () {
+        var formPersonalInformation = document.getElementById("personalInformation"),
+            validator = new Validator(formPersonalInformation);
+
+        function Validator (form) {
+            this.validatingForm = form;
+            form.addEventListener("submit", function () {
+                if (!validator.validate(this)) {
+                    event.preventDefault();
+                    event.returnValue = false;
+                    return false;
+                }
+                alert("Success to validate"); 
+                return true;
+            });
+        }
+
+        Validator.prototype.ruleSet = {};
+        Validator.prototype.decorate = function (ruleName, ruleFunction) {
+            this.ruleSet[ruleName] = ruleFunction;
+        }
+        Validator.prototype.validate = function (form) {
+            var validatingForm = form || this.validatingForm,
+                inputs = validatingForm.getElementsByClassName("validate"),
+                length = inputs.length,
+                i, j,
+                input,
+                checkRules, rule, ruleLength;
+
+            for(i = 0 ; i < length ; i++) {
+                input = inputs[i];
+                if (input.dataset.validateRules) {
+                    checkRules = input.dataset.validateRules.split(" ");
+                    ruleLength = checkRules.length;
+                    for (j = 0 ; j < ruleLength ; j++) {
+                        rule = checkRules[j];
+                        if (this.ruleSet.hasOwnProperty(rule)) {
+                            if (!this.ruleSet[rule].call(null, input)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        validator.decorate("required", function (input) {
+            if (!input.value) {
+                alert(input.name + " is required");
+                return false;
+            }
+            return true;
+        });
+
+        validator.decorate("alphabet", function (input) {
+            var regex = /^[a-zA-Z\s]*$/;
+            if (!regex.test(input.value)) {
+                alert(input.name + " has to be only alphabets");
+                return false;
+            }
+            return true;
+        });
+
+        validator.decorate("number", function (input) {
+            var regex = /^[0-9]*$/;
+            if (!regex.test(input.value)) {
+                alert(input.name + " has to be only numbers");
+                return false;
+            }
+            return true;
+        });
+    }());
+    </script>
+</body>
+</html>
+

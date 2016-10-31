@@ -1,0 +1,41 @@
+
+<script>
+(function () {
+    var car = {
+        beep: function beep() {
+            alert("BEEP");
+        },
+        brake: function brake() {
+            alert("STOP!");
+        },
+        accelerator: function accelerator() {
+            alert("GO"); }
+        };
+
+    function wrap(func, wrapper) {
+        return function() {
+            var args = [func].concat(Array.prototype.slice.call(arguments));
+            return wrapper.apply(this, args);
+        };
+    }
+    function wrapObject(obj, wrapper) {
+        var prop;
+        for(prop in obj) {
+            if (obj.hasOwnProperty(prop) && typeof obj[prop] === "function") {
+                obj[prop] = wrap(obj[prop], wrapper);
+            }
+        }
+    }
+
+    wrapObject(car, function (func) {
+        console.log(func.name + " has been invoked");
+        func.apply(this, Array.prototype.slice(arguments, 1));
+    });
+
+    car.accelerator();
+    car.beep();
+    car.brake();
+
+}());
+</script>
+

@@ -1,0 +1,64 @@
+
+<html>
+<head>
+    <style>
+    #chatLog {
+        border:1px solid black;
+        width: 200px;
+        height: 200px;
+        overflow-y: scroll;
+    }
+    </style>
+</head>
+<body>
+    <div id="chatLog"></div>
+    <form id="formChat">
+        <input type="text" id="inputChat"></input>
+        <input type="submit" value="send"></input>
+    </form>
+    <script>
+    (function () {
+        var divChatLog = document.getElementById("chatLog"),
+            formChat = document.getElementById("formChat"),
+            inputChat = document.getElementById("inputChat"),
+            isPending = false,
+            requestChat = [];
+
+        formChat.addEventListener("submit", function () {
+            proxySendChat(inputChat.value);
+            inputChat.value = "";
+            event.returnValue = false;
+            return false;
+        });
+
+        function proxySendChat(chat) {
+            if (isPending === true) {
+                requestChat.push(chat);
+            } else {
+                sendChatRequest([chat]);
+            }
+        }
+        function sendChatRequest(chats) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "./send_chat.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            isPending = true;
+            xhr.onload = function () {
+                var pChat = document.createElement("p");
+                pChat.innerHTML = xhr.responseText;
+                divChatLog.appendChild(pChat);
+                if (requestChat.length > 0) {
+                    sendChatRequest(requestChat);
+                    requestChat = [];
+                } else {
+                    isPending = false;
+                }
+            };
+            xhr.send("chats=" + encodeURIComponent(JSON.stringify(chats)));
+        }
+
+    }());
+    </script>
+</body>
+</html>
+

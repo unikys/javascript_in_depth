@@ -1,0 +1,49 @@
+
+<html>
+<body>
+    <video style="width:480px" id="videoBunny" src="http://media.w3.org/2010/05/bunny/movie.ogv">
+    </video>
+    <div id="controlPanel">
+        <button id="play">Play</button>
+        <button id="pause">Pause</button>
+        <button id="volumeUp">Volume+</button>
+        <button id="volumeDown">Volume-</button>
+    </div>
+    <script>
+(function () {
+    var divControlPanel = document.getElementById("controlPanel"),
+        videoBunny = document.getElementById("videoBunny"),
+        proxyClickEventHandler = {
+            "play": function () {
+                videoBunny.play();
+            },
+            "pause": function () {
+                videoBunny.pause();
+            },
+            "volumeUp": function () {
+                if (videoBunny.volume <= 0.9) {
+                    videoBunny.volume += 0.1;
+                } else {
+                    videoBunny.volume = 1;
+                }
+            },
+            "volumeDown": function () {
+                if (videoBunny.volume >= 0.1) {
+                    videoBunny.volume -= 0.1;
+                } else {
+                    videoBunny.volume = 0;
+                }
+            }
+        };
+
+    divControlPanel.addEventListener("click", function (e) {
+        var target = e.target || e.srcElement;
+        if (proxyClickEventHandler.hasOwnProperty(target.id)) {
+            proxyClickEventHandler[target.id].call();
+        }
+    }, true);
+}());
+</script>
+</body>
+</html>
+

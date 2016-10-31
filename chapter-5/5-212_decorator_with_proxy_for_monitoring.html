@@ -1,0 +1,80 @@
+
+
+<script>
+(function () {
+    var monitorTool,
+        car,
+        wrapperFunction;
+
+    monitorTool = (function () {
+        var functionSequence = [];
+        return {
+            decorate: function (name, func) {
+                functionSequence.push({
+                    name: name,
+                    func: func });
+            },
+            monitor: function (func) {
+                var length = functionSequence.length;
+                for (i = 0 ; i < length ; i++) {
+                    functionSequence[i].func.apply(this, arguments);
+                }
+            }
+        };
+    }());
+
+    monitorTool.decorate("before", function (func) {
+        console.log(func.name + " function has started at " + Date.now());
+    });
+    monitorTool.decorate("decorated", function (func) {
+        func.apply(this, Array.prototype.slice(arguments, 1));
+    });
+    monitorTool.decorate("after", function (func) {
+        console.log(func.name + " function has finished at " + Date.now());
+    });
+
+    wrapperFunction = monitorTool.monitor;
+
+    car = {
+        beep: function beep() {
+            alert("BEEP"); },
+        brake: function brake() {
+            alert("STOP!");
+        },
+        accelerator: function accelerator() {
+            alert("GO");
+        }
+    };
+
+    function wrap(func, wrapper) {
+        return function() {
+            var args = [func].concat(Array.prototype.slice.call(arguments));
+            return wrapper.apply(this, args);
+        };
+    }
+
+    function wrapObject(obj, wrapper) {
+        var prop;
+        for(prop in obj) {
+            if (obj.hasOwnProperty(prop) && typeof obj[prop] === "function") {
+                obj[prop] = wrap(obj[prop], wrapper);
+            }
+        }
+    }
+
+
+    wrapObject(car, wrapperFunction);
+
+    console.log("A. car.accelerator() monitor");
+    car.accelerator();
+
+    console.log("\nB. car.beep() monitor");
+    car.beep();
+
+    console.log("\nC. car.brake() monitor");
+    car.brake();
+
+}());
+</script>
+
+

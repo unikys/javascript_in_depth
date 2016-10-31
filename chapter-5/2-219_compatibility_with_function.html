@@ -1,0 +1,32 @@
+
+<script>
+(function () {
+    var addEventHandler,
+        removeEventhandler;
+
+    if (document.addEventListener) {
+        addEventHandler = function (dom, type, fn) {
+            dom.addEventListener(type, fn);
+        }
+        removeEventHandler = function (dom, type, fn) {
+            dom.removeEventListener(type, fn);
+        }
+    } else if (document.attachEvent) {
+        addEventHandler = function (dom, type, fn) {
+            dom.attachEvent( 'on'+type, function () {
+                fn.call(dom, window.event);
+            });
+        };
+        removeEventHandler = function (dom, type, fn) {
+            dom.detachEvent('on'+type, fn);
+        };
+    } else {
+        addEventHandler = function (dom, type, fn) {
+            dom["on" + type] = fn;
+        };
+        removeEventHandler = function (dom, type, fn) {
+            dom["on" + type] = null;
+        };
+    }
+}());
+</script>

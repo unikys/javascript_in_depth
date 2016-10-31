@@ -1,0 +1,16 @@
+
+<script>
+(function () {
+    function sum(x, y) {
+        return x + y;
+    }
+    var makeAdder = function (x) {
+        return function (y) {
+            return sum(x, y);
+        };
+    };
+    var adderFour = makeAdder(4);
+    console.log(adderFour(1)); // === 5
+    console.log(adderFour(5)); // === 9
+}());
+</script>

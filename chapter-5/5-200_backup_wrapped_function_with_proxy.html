@@ -1,0 +1,27 @@
+
+<script>
+(function () {
+    function wrap(func, wrapper) {
+        return function() {
+            var args = [func].concat(Array.prototype.slice.call(arguments));
+            return wrapper.apply(this, args);
+        };
+    }
+    var _existingFunction = existingFunction,
+        existingFunction = wrap(_existingFunction, function (func) {
+            console.log("Wrapper function is called with arguments");
+            console.log(arguments);
+            func.apply(this, Array.prototype.slice.call(arguments, 1));
+        });
+
+    function existingFunction() {
+        console.log("Existing function is called with arguments");
+        console.log(arguments);
+    }
+
+    console.log("1. Calling wrapped existing function");
+    existingFunction("First argument", "Second argument", "Third argument");
+}());
+
+</script>
+
