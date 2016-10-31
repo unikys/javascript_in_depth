@@ -1,0 +1,19 @@
+<script>
+
+var person = {
+    name: "anonymous",
+    sayHello: function () {
+        alert("Hello, my name is " + this.name);
+    }
+};
+function Unikys() {
+    this.name = "Unikys";
+}
+Unikys.prototype = person;
+
+var unikys = new Unikys();
+unikys.sayHello(); // === "Hello, my name is Unikys"
+person.sayHello(); // === "Hello, my name is anonymous"
+console.log(unikys instanceof Unikys); // === true
+
+</script>

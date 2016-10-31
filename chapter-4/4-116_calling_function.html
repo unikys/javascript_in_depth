@@ -1,0 +1,22 @@
+<script>
+
+// General way to call a function
+function say(something) {
+    alert(something);
+}
+say("Hello world!");
+
+// Calling a member function
+var unikys = {
+    say: function (something) {
+        alert(something);
+    }
+};
+unikys.say("Hello world!");
+
+
+// Calling with call() and apply() function
+say.call(undefined, "Hello world!");
+say.apply(undefined, ["Hello world!"]);
+
+</script>

@@ -1,0 +1,26 @@
+<script>
+
+
+function Person(name) {
+    this.name = name;
+}
+Person.prototype = {
+    yell: function () {
+        alert("My name is " + this.name);
+    }
+};
+
+var unikys = Object.create(Person.prototype, {
+    name : {
+        value: "Unikys",
+        configurable: true,
+        enumerable: true,
+        writable: true
+    }
+});
+
+unikys.yell(); // === "My name is Unikys"
+unikys.name = "Suniky";
+unikys.yell(); // === ?
+
+</script>

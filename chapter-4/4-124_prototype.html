@@ -1,0 +1,52 @@
+<script>
+
+function Person(name, blog) {
+    this.name = name;
+    this.blog = blog;
+}
+Person.prototype = {
+    getName : function () {
+        return this.name;
+    },
+    getBlog : function () {
+        return this.blog;
+    }
+};
+
+var unikys = new Person("unikys", "unikys.tistory.com");
+var stranger = new Person("stranger", "www.google.com");
+
+console.log(unikys.getName()); // === "unikys"
+console.log(unikys.getBlog()); // === "unikys.tistory.com"
+console.log(stranger.getName()); // === "stranger"
+console.log(stranger.getBlog()); // === "www.google.com"
+
+
+// Adding a function to prototype
+Person.prototype.introduce = function () {
+    console.log("Hi!, my name is " + this.name + ", please visit my blog " + this.blog);
+};
+unikys.introduce(); // === "Hi!, my name is unikys, please visit my blog unikys.tistory.com"
+
+
+// Changing the function in prototype
+Person.prototype.introduce = function () {
+    console.log("Hello, " + this.name + "!");
+};
+unikys.introduce(); // === "Hello, unikys!"
+
+
+// Changing the variable in prototype
+Person.prototype.gender = "male";
+
+console.log(unikys.gender); // === "male"
+console.log(stranger.gender); // === "male"
+
+stranger.gender = "female";
+console.log(stranger.gender); // === "female"
+console.log(unikys.gender); // === "male" (female이 아니다?!);
+console.log(Person.prototype.gender); // === "male" (이것도 female이 아니다?!)
+
+
+
+</script>

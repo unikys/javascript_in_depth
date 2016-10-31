@@ -1,0 +1,19 @@
+<script>
+
+function Person(name, blog) {
+    this.name = name;
+    this.blog = blog;
+    this.getName = function () {
+        return this.name;
+    };
+    this.getBlog = function () {
+        return this.blog;
+    };
+}
+
+var unikys = new Person("unikys", "unikys.tistory.com");
+console.log(unikys.getName()); // === "unikys"
+console.log(unikys.getBlog()); // === "unikys.tistory.com"
+
+</script>
+

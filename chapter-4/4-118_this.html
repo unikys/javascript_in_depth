@@ -1,0 +1,24 @@
+<script>
+function whatsThis() {
+    return this.toString();
+}
+var unikys = {
+    what: whatsThis,
+    toString: function () {
+        return "[object unikys]";
+    }
+};
+
+console.log(whatsThis());                   //#1
+console.log(unikys.what());                 //#2
+console.log(whatsThis.call());              //#3
+console.log(whatsThis.apply(unikys));       //#4
+console.log(unikys.what.call(undefined));   //#5
+console.log(unikys.what.call(unikys));      //#6
+
+
+// Calling a member function set to a local
+var newWhat = unikys.what;
+console.log(newWhat()); // === "[object Window]"
+
+</script>

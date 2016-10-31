@@ -1,0 +1,25 @@
+<script>
+
+function Person() {
+    this.name = "anonymous";
+    this.job = "none";
+    this.sayHello = function () {
+        alert("Hello, my name is " + this.name);
+    };
+}
+
+function Unikys() {
+    var obj = new Person();
+    obj.name = "Unikys";
+    obj.job = "Programmer";
+    return obj;
+}
+
+var unikys = new Unikys();
+unikys.sayHello(); // === "Hello, my name is Unikys"
+
+// Problem with this method
+console.log(unikys instanceof Unikys); // === false
+console.log(unikys instanceof Person); // === true
+
+</script>

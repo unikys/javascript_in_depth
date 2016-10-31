@@ -1,0 +1,21 @@
+<script>
+
+class Person {
+    constructor() {
+        this.name = "anonymous";
+    }
+}
+
+class Unikys extends Person {
+    constructor() {
+        super();
+        this.name = "Unikys";
+    }
+}
+
+var unikys = new Unikys();
+console.log(unikys instanceof Unikys); // === true
+console.log(unikys instanceof Person); // === true
+console.log(unikys.constructor); // === class Unikys extends Person
+
+</script>

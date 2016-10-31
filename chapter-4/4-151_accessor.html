@@ -1,0 +1,35 @@
+<script>
+
+var unikys = {};
+Object.defineProperties(unikys, {
+    firstName: {
+        value: "Sung-ihk",
+        writable: true
+    },
+    lastName: {
+        value: "Yang",
+        writable: true
+    },
+    fullName: {
+        get: function () {
+            return this.firstName + " " + this.lastName;
+        },
+        set: function (value) {
+            var res = value.split(" ");
+            if (res.length > 1) {
+                this.firstName = res[0];
+                this.lastName = res[1];
+            } else {
+                alert("Wrong format");
+            }
+        }
+    }
+});
+
+
+console.log(unikys.fullName); // === "Sung-ihk Yang"
+unikys.fullName = "Hello world";
+console.log(unikys.firstName); // === "Hello"
+console.log(unikys.lastName); // === "world"
+
+</script>
