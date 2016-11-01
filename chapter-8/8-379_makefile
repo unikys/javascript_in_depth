@@ -1,0 +1,60 @@
+project = vjgraph
+target-js-min = ${project}-min.js
+target-css-min = ${project}-min.css
+target-js-full = ${project}-full.js
+target-css-full = ${project}-full.css
+
+targets =   ${target-js-min} \
+            ${target-js-min}.gz \
+            ${target-js-full} \
+            ${target-css-min} \
+            ${target-css-min}.gz \
+            ${target-css-full}
+
+#Source directory
+js_dir = ./js/
+css_dir = ./css/
+
+#Dependent libraries
+dependencies = ${js_dir}excanvas.min.js\
+${js_dir}util.js
+
+#Javscript files
+sources =   ${js_dir}VJGraph.js\
+            ${js_dir}common.js
+#All files
+js_files = ${dependencies} ${sources}
+
+#Build all
+all: ${target-js-full} ${target-js-min} ${target-css-full} ${target-css-min}
+
+#Concatnate all files
+${target-js-full}: ${js_files}
+    cat > $@ $^
+
+${target-css-full}: ${css_files}
+    cat > $@ $^
+
+#Minification with closure compiler
+${target-js-min}: ${target-js-full}
+    java -jar compiler.jar --js $^ --js_output_file $@
+    gzip -c -9 $@ > $@.gz
+
+${target-css-min}: ${target-css-full}
+    java -jar yuicompressor-2.4.8.jar $^ -o $@
+
+clean:
+    rm -rf ${targets}
+
+commit:
+    git add ${targets}
+    git commit -a -m "Version: x.x.x"
+    git push origin master
+
+deploy:
+    git push production master
+
+dev:
+    git push develop master
+
+install: commit deploy dev

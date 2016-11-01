@@ -1,0 +1,33 @@
+<script>
+(function ()
+{
+    var user = 
+    {
+        "getName": function ()
+        {
+            return
+            {
+                name: "Unikys"
+            };
+        },
+        "getLanguages": function ()
+        {
+            return
+            [
+                "Javscript",
+                "C",
+                "C++",
+                "JAVA"
+            ]
+        }
+    },
+    whoami = function ()
+    {
+        console.log(user);
+        console.log(user.getName());
+        console.log(user.getLanguages());
+    }
+    whoami();
+}());
+
+</script>
