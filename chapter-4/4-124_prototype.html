@@ -4,13 +4,11 @@ function Person(name, blog) {
     this.name = name;
     this.blog = blog;
 }
-Person.prototype = {
-    getName : function () {
-        return this.name;
-    },
-    getBlog : function () {
-        return this.blog;
-    }
+Person.prototype.getName = function () {
+    return this.name;
+};
+Person.prototype.getBlog = function () {
+    return this.blog;
 };
 
 var unikys = new Person("unikys", "unikys.tistory.com");

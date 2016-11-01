@@ -1,34 +1,41 @@
 
-<script>
-(function () {
-    var previousOnload;
+<html>
+<body>
+    <img src="./my_important_image.jpg" width="300" height="200"></img>
+    <div>I need to show this important information as fast as possible</div> 
 
-    if (window.addEventListener) {
-        window.addEventListener("load", lazyload);
-    } else if (window.attachEvent) {
-        window.attachEvent("onload", lazyload);
-    } else if (window.onload) {
-        previousOnload = window.onload;
-        window.onload = function () {
-            previousOnload.call();
-            lazyload();
+    <script>
+    (function () {
+        var previousOnload;
+
+        if (window.addEventListener) {
+            window.addEventListener("load", lazyload);
+        } else if (window.attachEvent) {
+            window.attachEvent("onload", lazyload);
+        } else if (window.onload) {
+            previousOnload = window.onload;
+            window.onload = function () {
+                previousOnload.call();
+                lazyload();
+            }
+        } else {
+            window.onload = lazyload; // this can be overwritten by another JS
         }
-    } else {
-        window.onload = lazyload; // this can be overwritten by another JS
-    }
 
-    function lazyload() {
-        var scriptTag = document.createElement("script"),
-            headTag = document.getElementsByTagName("head")[0];
-        scriptTag.setAttribute("src", "./sleep.js");
-        scriptTag.setAttribute("type", "text/javascript");
-        scriptTag.setAttribute("async", "true");
+        function lazyload() {
+            var scriptTag = document.createElement("script"),
+                headTag = document.getElementsByTagName("head")[0];
+            scriptTag.setAttribute("src", "./sleep.js");
+            scriptTag.setAttribute("type", "text/javascript");
+            scriptTag.setAttribute("async", "true");
 
-        // way around if there is no head tag
-        if (!headTag) {
-            headTag = document.getElementsByTagName("script")[0].parentNode;
+            // way around if there is no head tag
+            if (!headTag) {
+                headTag = document.getElementsByTagName("script")[0].parentNode;
+            }
+            headTag.appendChild(scriptTag);
         }
-        headTag.appendChild(scriptTag);
-    }
-}());
-</script>
+    }());
+    </script>
+</body>
+</html>

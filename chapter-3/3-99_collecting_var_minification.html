@@ -1,0 +1,11 @@
+<html>
+<body>
+    <div id="subject0"></div>
+    <div id="subject1"></div>
+    <div id="subject2"></div>
+
+    <script>
+!function(){var e,t,n,s=["1st subject","2nd subject","3rd subject"];for(t=0;t<s.length;t++)e=document.getElementById("subject"+t),e.innerHTML=e.value=s[t],e.addEventListener("click",function(){alert(this.value+" pressed!")});n=new XMLHttpRequest,n.open("GET","http://unikys.tistory.com/list/"),n.onload=function(){var e,t,s=JSON.parse(n.responseText);for(t=0;t<s.length;t++)e=document.getElementById("content"+t),e.innerHTML=s[t]},n.send()}();
+    </script>
+</body>
+</html>

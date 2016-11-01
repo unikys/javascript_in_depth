@@ -1,4 +1,4 @@
-
+<script>
 var property1 = "New",
     property2 = "Object literal",
     namedProperty = "Functionalities";
@@ -77,11 +77,14 @@ var car = {
         return this.name;
     }
 }
+
 var suvES6 = {
     __proto__: car,
     name: "My car",
     type: "SUV"
 };
+console.log(suvES6);
+
 var suvES5 = Object.create(car, {
     name: {
         writable:true,
@@ -94,9 +97,12 @@ var suvES5 = Object.create(car, {
         value: "SUV"
     }
 });
+console.log(suvES5);
 
 var suvES5Other = Object.create(car);
 suvES5Other.name = "My car";
 suvES5Other.type = "SUV";
 
+console.log(suvES5Other);
 
+</script>
