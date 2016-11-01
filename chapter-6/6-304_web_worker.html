@@ -1,0 +1,25 @@
+
+<html>
+<body>
+    <select id="doWorker">
+        <option>-- SELECT --</option>
+        <option>doLargeLoop</option>
+    </select>
+
+    <script>
+(function () {
+    var worker = new Worker("worker.js"),
+        selectWorker = document.getElementById("doWorker");
+    selectWorker.addEventListener("change", function () {
+        console.log("Main thread: sending message - " + this.value);
+        worker.postMessage(this.value);
+     });
+
+    worker.onmessage = function (msg) {
+        console.log("Main thread: " + msg.data);
+    }
+}());
+</script>
+</body>
+</html>
+

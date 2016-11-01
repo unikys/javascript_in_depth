@@ -1,0 +1,96 @@
+
+<html>
+<head>
+    <style>
+    #log {
+        height: 200px;
+        overflow-y: scroll;
+        font-size: 8px;
+    }
+    </style>
+</head>
+<body>
+    <div id="currentTime"></div>
+    <div id="internalClock"></div>
+    <button id="startClock">Start interval clock</button>
+    <button id="stopClock">Stop interval clock</button>
+    <button id="initiateClock">Initiate interval clock</button>
+    <button id="sleepFiveSeconds">Sleep 5 Seconds</button>
+    <div id="log"> </div>
+    <script>
+    (function () {
+        var divCurrentTime = document.getElementById("currentTime"),
+            divInternalClock = document.getElementById("internalClock"),
+            timePreviousClock = null,
+            idIntervalOneSecond = null,
+            divLog = document.getElementById("log"),
+            funcIntervalTimeDifference = (function () {
+                var previousInvokeTime = null;
+                return function () {
+                    var difference;
+                    if (previousInvokeTime === null) {
+                        timePreviousClock = Date.now();
+                        difference = 0;
+                    } else {
+                        difference = Date.now() - previousInvokeTime;
+                    }
+                    previousInvokeTime = Date.now();
+                    divCurrentTime.innerHTML = new Date();
+                    timePreviousClock += difference;
+                    divInternalClock.innerHTML = new Date(timePreviousClock);
+
+                    log("funcIntervalTimeDifference: " + Date.now() + " <> " + timePreviousClock);
+                };
+            }());
+
+        document.getElementById("startClock").addEventListener("click", startClock);
+        document.getElementById("stopClock").addEventListener("click", stopClock);
+        document.getElementById("initiateClock").addEventListener("click", initiateClock);
+        document.getElementById("sleepFiveSeconds").addEventListener("click", sleepFiveSeconds);
+
+        function initiateClock() {
+            divCurrentTime.innerHTML = new Date();
+            timePreviousClock = Date.now();
+            divInternalClock.innerHTML = new Date(timePreviousClock);
+
+            log("initiateClock");
+        }
+
+        function stopClock() {
+            if (idIntervalOneSecond !== null) {
+                clearInterval(idIntervalOneSecond);
+                idIntervalOneSecond = null;
+            }
+            log("stopClock");
+        }
+
+        function startClock() {
+            if (idIntervalOneSecond === null) {
+                idIntervalOneSecond = setInterval(funcIntervalTimeDifference, 1000);
+            }
+            log("startClock");
+        }
+
+        function sleepFiveSeconds() {
+            log("sleepFiveSeconds start: " + new Date());
+            sleep(5000);
+
+            log("sleepFiveSeconds end: " + new Date());
+        }
+
+        function sleep(waitMilliseconds) {
+            var waitUntil = Date.now() + waitMilliseconds;
+            while(Date.now() < waitUntil) {
+                ;
+            }
+        }
+
+        function log(logString) {
+            var divLogLine = document.createElement("div");
+            divLogLine.appendChild(document.createTextNode(new Date() + ": " + logString));
+            divLog.insertBefore(divLogLine, divLog.childNodes[0]);
+        }
+    }());
+</script> </body>
+</html>
+

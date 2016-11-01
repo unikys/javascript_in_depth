@@ -1,0 +1,51 @@
+
+<html>
+    <button id="addItem">
+        Add New Input
+    </button>
+    <div id="items"></div>
+    <script>
+    (function () {
+        var divItems = document.getElementById("items"),
+            buttonAddItem = document.getElementById("addItem"),
+            inputItem = document.createElement("input"),
+            divLog = document.getElementById("log");
+
+        buttonAddItem.onclick = function () {
+            var inputCloneItem = inputItem.cloneNode(true),
+                waitSeconds = 10,  // Wait for 10 seconds
+                intervalCount = 0,
+                intervalExecutionCount = 3,
+                intervalId; 
+
+            inputCloneItem.value = "Give me focus";
+            divItems.appendChild(inputCloneItem);
+            console.log("Onclick function invoked at: \t" + Date.now());
+
+            intervalId = setInterval(function () {
+                if (++intervalCount > intervalExecutionCount) {
+                    clearInterval(intervalId);
+                    return;
+                }
+                console.log("#" + intervalCount + " interval invoked at: \t\t" + Date.now());
+            }, 2000);
+
+            setTimeout(function () {
+                inputCloneItem.focus();
+                console.log("Focus given at: \t\t\t\t" + Date.now());
+                sleep(waitSeconds*1000);
+            }, 5000);
+
+            sleep(waitSeconds*1000); 
+        };
+
+        function sleep(waitMilliseconds) {
+            var waitUntil = Date.now() + waitMilliseconds;
+            while(Date.now() < waitUntil) {
+                ;
+            }
+        }
+    }());
+    </script>
+</html>
+

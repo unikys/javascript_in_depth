@@ -1,0 +1,41 @@
+
+<html>
+<body>
+    <div id="container"></div>
+    <script>
+(function () {
+    var itemList = ["Javascript", "Java", "C", "C++", "Python", "Ruby"],
+        divItem,
+        divItemList = [],
+        divContainer = document.getElementById("container"),
+        i,
+        length = itemList.length;
+
+    for (i = 0 ; i < length ; i++) {
+        divItem = document.createElement("div");
+        divItem.appendChild(document.createTextNode(itemList[i]));
+        divItem.addEventListener("click", (function (name) {
+            return function () {
+                var divClickedItem = divItemList[name],
+                    datasetClickedItem = divClickedItem.dataset,
+                    styleClickedItem = divClickedItem.style;
+                if (datasetClickedItem.selected === "true") {
+                    styleClickedItem.backgroundColor = "#FFFFFF";
+                    styleClickedItem.color = "#000000";
+                    datasetClickedItem.selected = "false";
+                } else {
+                    styleClickedItem.backgroundColor = "#000000";
+                    styleClickedItem.color = "#FFFFFF";
+                    datasetClickedItem.selected = "true";
+                }
+            };
+        }(itemList[i])));
+
+        divItemList[itemList[i]] = divItem;
+        divContainer.appendChild(divItem);
+    }
+}());
+</script>
+</body>
+</html>
+

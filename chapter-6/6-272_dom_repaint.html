@@ -1,0 +1,52 @@
+
+<html>
+<head>
+    <style>
+    .default {
+        width: 300px;
+        background-color: lightgray;
+        border: 1px solid black;
+    }
+
+    #floating {
+        position: absolute;
+        left: 350px;
+        top: 100px;
+        width: 100px;
+        height: 50px;
+        border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+    <div id="changeBackground" class="default">
+        &lt;div&gt;
+            Click to change my background color
+        &lt;/div&gt;
+    </div>
+    <div id="changeVisibility" class="default">
+        &lt;div&gt;
+            Click to make me disappear
+        &lt;/div&gt;
+        <div id="floating">Floating div</div>
+    </div>
+    <div id="fixedDiv" class="default">
+        &lt;div&gt;
+            I won't move
+        &lt;/div&gt;
+    </div>
+    <script>
+    (function () {
+        document.getElementById("changeBackground").addEventListener('click', function () {
+            this.style.backgroundColor = "black";
+            this.style.color = "white";
+        });
+
+        document.getElementById("changeVisibility").addEventListener("click", function () {
+            this.style.visibility = "hidden"; 
+        });
+    }());
+    </script>
+</body>
+</html>
+

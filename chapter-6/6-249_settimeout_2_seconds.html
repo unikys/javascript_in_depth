@@ -1,0 +1,36 @@
+
+<html>
+    <button id="addItem">
+        Add New Input
+    </button>
+    <div id="items"></div>
+    <script>
+    (function () {
+        var divItems = document.getElementById("items"),
+            buttonAddItem = document.getElementById("addItem"),
+            inputItem = document.createElement("input"),
+            divLog = document.getElementById("log");
+
+        buttonAddItem.onclick = function () {
+            var inputCloneItem = inputItem.cloneNode(true),
+                waitSeconds = 10; // Wait for 10 seconds
+
+            inputCloneItem.value = "Give me focus"; divItems.appendChild(inputCloneItem);
+            console.log("Execute setTimeout at: \t" + Date.now());
+            setTimeout(function () {
+                inputCloneItem.focus();
+                console.log("Set focus at: \t\t\t" + Date.now())
+            }, 2000);
+            sleep(waitSeconds * 1000);
+        };
+
+        function sleep(waitMilliseconds) {
+            var waitUntil = Date.now() + waitMilliseconds;
+            while(Date.now() < waitUntil) {
+                ;
+            }
+        }
+
+    }());
+    </script>
+</html>

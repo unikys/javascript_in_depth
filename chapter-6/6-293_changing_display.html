@@ -1,0 +1,57 @@
+
+<html>
+<body>
+    <div id="guestbook">
+        <table>
+            <thead>
+                <td>Name</td>
+                <td>Subject</td>
+                <td>Contents</td>
+            </thead>
+            <tbody id="guestbookTbody">
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form id="writeForm">
+            <label>Name: <input type="text" id="name"/></label>
+            <label>Subject: <input type="text" id="subject"/></label>
+            <label>Contents: <textarea id="contents"></textarea></label>
+            <input type="submit"/>
+        </form>
+    </div>
+    <script>
+(function () {
+    var inputName = document.getElementById("name"),
+        inputSubject = document.getElementById("subject"),
+        inputContents = document.getElementById("contents"),
+        divGuestbook = document.getElementById("guestbook"),
+        tbodyGuestbook = document.getElementById("guestbookTbody");
+
+    document.getElementById("writeForm").addEventListener("submit", function () {
+        var trGuestbook = document.createElement("tr"),
+            tdName = document.createElement("td"),
+            tdSubject = document.createElement("td"),
+            tdContents = document.createElement("td");
+
+        divGuestbook.style.display = "none";
+
+        tbodyGuestbook.appendChild(trGuestbook);
+        trGuestbook.appendChild(tdName);
+        trGuestbook.appendChild(tdSubject);
+        trGuestbook.appendChild(tdContents);
+        tdName.innerHTML = inputName.value;
+        tdSubject.innerHTML = inputSubject.value;
+        tdContents.innerHTML = inputContents.value;
+
+        divGuestbook.style.display = "block";
+
+        event.returnValue = false;
+        return false;
+    });
+}());
+</script>
+</body>
+</html>
+
+

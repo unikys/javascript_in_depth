@@ -1,0 +1,85 @@
+
+<html>
+<head>
+    <style>
+    #noticeWrapper {
+        overflow: hidden;   /* Don't show the overflowing part */
+        height: 20px;       /* The banner's height */
+        width: 200px;       /* The banner's width */
+        position: relative;
+        border: 1px solid black;
+    }
+
+    #notice {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        top: 0px;
+    }
+
+    .noticeSubject {
+        height: 20px;
+        width: 200px;
+        list-style: none;
+    }
+
+    .noReflow{
+        width: 200px;
+        height: 100px;
+        border: 1px solid black;
+        background-color: lightgray;
+    }
+    </style>
+</head>
+<body>
+    <div class="noReflow">I'll not reflow </div>
+    <div id="noticeWrapper">
+        <ul id="notice">
+            <li class="noticeSubject">Link to the first article</li>
+            <li class="noticeSubject">Link to the second article</li>
+            <li class="noticeSubject">Link to the third article</li>
+            <li class="noticeSubject">Link to the last article</li>
+        </ul>
+    </div>
+    <div class="noReflow"> Neither me</div>
+    <script>
+    (function () {
+        var ulNotice = document.getElementById("notice"),
+            currentNoticeTop = 0,
+            currentIndex = 0,
+            maxIndex = ulNotice.getElementsByClassName("noticeSubject").length - 1,
+            currentRollingUp = true,
+            subjectHeight = 20,
+            velocityPerSecond = 20,
+            previousFrame = null;
+
+        setTimeout(rollNextNotice, 0);
+
+        function rollNextNotice() {
+            requestAnimationFrame(rollNotice);
+        }
+
+        function rollNotice(time) {
+            var diff = (previousFrame !== null ? time - previousFrame : 0);
+            previousFrame = time;
+            currentNoticeTop += (diff/1000) * velocityPerSecond;
+            if (currentNoticeTop * velocityPerSecond >= currentIndex * -subjectHeight * velocityPerSecond) {
+                if (currentIndex === maxIndex || currentIndex === 0) {
+                    currentRollingUp = !currentRollingUp;
+                    velocityPerSecond = -velocityPerSecond;
+                }
+                currentNoticeTop = currentIndex * -subjectHeight;
+                currentIndex += (currentRollingUp ? -1 : 1);
+                previousFrame = null;
+
+                setTimeout(rollNextNotice, 1000);
+            } else {
+                requestAnimationFrame(rollNotice);
+            }
+            ulNotice.style.top = currentNoticeTop + "px";
+        }
+    }());
+    </script>
+</body>
+</html>
+

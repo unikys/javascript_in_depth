@@ -1,0 +1,37 @@
+
+<html>
+<head>
+    <style>
+    #bannerWrapper {
+        overflow: hidden;   /* Don't show the overflowing part */
+        height: 400px;      /* The banner's height */
+        width: 265px;       /* The banner's width */
+        position: relative;
+    }
+    #bannerImg {
+        position: absolute;
+    }
+
+    #bannerImg.mouseover {
+        top: -400px; /* move the banner when the mouse is over */
+    }
+    </style>
+</head>
+<body>
+    <div id="bannerWrapper">
+        <img id="bannerImg" src="http://i.imgur.com/3DpJ0ou.png"/>
+    </div>
+    <script>
+    (function () {
+        var imgBannerImg = document.getElementById("bannerImg");
+        imgBannerImg.addEventListener("mouseover", function () {
+            this.classList.add("mouseover");
+        });
+        imgBannerImg.addEventListener("mouseout", function () {
+            this.classList.remove("mouseover");
+        });
+    }());
+    </script>
+</body>
+</html>
+

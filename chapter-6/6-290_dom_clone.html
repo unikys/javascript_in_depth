@@ -1,0 +1,53 @@
+
+<html>
+<body>
+    <div id="guestbook">
+        <table>
+            <thead>
+                <td>Name</td>
+                <td>Subject</td>
+                <td>Contents</td>
+            </thead>
+            <tbody id="guestbookTbody">
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form id="writeForm">
+            <label>Name: <input type="text" id="name"/></label>
+            <label>Subject: <input type="text" id="subject"/></label>
+            <label>Contents: <textarea id="contents"></textarea></label>
+            <input type="submit"/>
+        </form>
+    </div>
+    <script>
+    (function () {
+        var inputName = document.getElementById("name"),
+            inputSubject = document.getElementById("subject"),
+            inputContents = document.getElementById("contents"),
+            tbodyGuestbook = document.getElementById("guestbookTbody"),
+            fragGuestbook = document.createDocumentFragment(),
+            trGuestbook = document.createElement("tr"),
+            tdName = document.createElement("td"),
+            tdSubject = document.createElement("td"),
+            tdContents = document.createElement("td");
+
+        fragGuestbook.appendChild(trGuestbook);
+        trGuestbook.appendChild(tdName);
+        trGuestbook.appendChild(tdSubject);
+        trGuestbook.appendChild(tdContents);
+
+        document.getElementById("writeForm").addEventListener("submit", function () {
+            tdName.innerHTML = inputName.value;
+            tdSubject.innerHTML = inputSubject.value;
+            tdContents.innerHTML = inputContents.value;
+
+            tbodyGuestbook.appendChild(fragGuestbook.cloneNode(true));
+            event.returnValue = false;
+            return false;
+        });
+    }());
+    </script>
+</body>
+</html>
+

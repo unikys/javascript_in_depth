@@ -1,0 +1,25 @@
+
+<html>
+    <input type="button" id="buttonStart" value="Start"/>
+    <script>
+
+    (function () {
+        var lastTime,
+            i = 0;
+        document.getElementById("buttonStart").onclick = function () {
+            lastTime = Date.now();
+            repeatedTimeout();
+        };
+
+        function repeatedTimeout() {
+            var currentTime = Date.now();
+            console.log("NestingLevel[" + ++i + "]: " + (currentTime - lastTime) + "ms");
+            if (i < 10) {
+                setTimeout(repeatedTimeout);
+            }
+            lastTime = Date.now();
+        }
+    }());
+
+    </script>
+</html>
