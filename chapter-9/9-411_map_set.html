@@ -1,0 +1,20 @@
+<script>
+(() => {
+    var map = new Map(),
+        key = {name: "Unikys"};
+
+    map.set("Hello", "World").set("ECMAScript", 6).set(key, "javascript");
+
+    for (let [ key, val ] of map.entries()) {
+        console.log(key + " = " + val);
+    }
+
+    var set = new Set();
+    set.add("Hello").add("World").add("ECMAScript").add("6");
+
+    console.log(set.has("ECMAScript")); // === true
+    for (let key of set.values()) {
+        console.log(key);
+    }
+})();
+</script>

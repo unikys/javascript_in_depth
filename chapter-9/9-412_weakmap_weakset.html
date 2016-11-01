@@ -1,0 +1,26 @@
+<script>
+
+(() => {
+    var weakSet = new WeakSet(),
+        weakMap = new WeakMap(),
+        obj = {
+            name: "Unikys"
+        },
+        val = {
+            language: "javascript"
+        };
+
+    weakSet.add(obj);
+    weakMap.set(obj, val);
+
+    console.log(weakSet.has(obj));
+    console.log(weakMap.has(obj));
+
+    obj = null;
+
+    console.log(weakSet.has(obj));
+    console.log(weakMap.has(obj));
+
+})();
+
+</script>

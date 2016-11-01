@@ -1,0 +1,26 @@
+<script>
+(() => {
+    var myObject = {
+        [Symbol()]: "First symbol",
+        [Symbol()]: "Second symbol"
+    };
+
+    console.log(myObject);
+
+    const key = Symbol();
+
+    console.log("typeof key : " + typeof key);
+
+    myObject[key] = "New symbol";
+
+    console.log(Object.keys(myObject)); // === []
+    console.log(Object.getOwnPropertyNames(myObject)); // === []
+    console.log(Object.getOwnPropertySymbols(myObject)); // === [Symbol(), Symbol(), Symbol()]
+})();
+
+(() => {
+    console.log(Symbol("unikys") === Symbol("unikys")); // === false
+    console.log(Symbol.for("unikys") === Symbol.for("unikys")); // === true
+})();
+
+</script>

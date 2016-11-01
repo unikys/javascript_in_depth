@@ -1,0 +1,23 @@
+<script>
+// >= ECMAScript 2016
+var array = ["a", "b", 1, 2, NaN];
+
+console.log(array.includes("a")); // === true
+console.log(array.includes(2)); // === true
+console.log(array.includes(NaN)); // === true
+
+
+// <= ES6
+console.log(array.indexOf("a") >= 0); // === true
+console.log(array.indexOf(2) !== -1); // === true
+console.log(array.indexOf(NaN) !== -1); // === false ? var includesNaN = false;
+
+for (var i = 0 ; i < array.length ; ++i) {
+    if (isNaN(array[i])) {
+        includesNaN = true;
+    }
+}
+
+console.log(includesNaN);
+
+</script>

@@ -1,0 +1,27 @@
+
+<script>
+(() => {
+    var promise = new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/longLoad");
+        xhr.onload = function () {
+            if (this.status >= 200 && this.status < 300) {
+                resolve(this.responseText);
+            } else {
+                reject(this.statusText);
+            }
+        };
+        xhr.onerror = function () {
+            reject(this.statusText);
+        }
+        xhr.send();
+    });
+
+    promise.then(function (responseText) {
+        console.log(responseText);
+    }).catch(function (statusText) {
+        alert("Error! " + statusText);
+    });
+})();
+</script>
+

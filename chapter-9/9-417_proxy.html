@@ -1,0 +1,25 @@
+<script>
+var target = {
+    unikys: "Hello, Unikys"
+};
+
+var proxy = new Proxy(target, {
+    get (target, name) {
+        return name in target ? target[name] : `Nice to meet you, ${name}`
+    },
+    set (target, name, value) {
+        if (name === "age") {
+            if (typeof value === "number") {
+                target[name] = value
+            } else {
+                console.log("Wrong type, must be number");
+            }
+        }
+    }
+});
+
+console.log(proxy.unikys);
+console.log(proxy.stranger);
+proxy.age = "4";
+
+</script>

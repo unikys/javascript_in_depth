@@ -1,0 +1,16 @@
+
+<script>
+
+function defaultValue(color="black", isNull="Nullable") {
+    console.log("color=" + color + " , isNull=" + isNull );
+}
+defaultValue(undefined, null);
+
+function previousDefaultValue(color, isNull) {
+    color = color || "black";
+    isNull = isNull || "Nullable";
+    console.log("color=" + color + " , isNull=" + isNull );
+}
+previousDefaultValue(undefined, null);
+
+</script>

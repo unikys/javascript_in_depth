@@ -1,0 +1,40 @@
+
+<script>
+(() => {
+    var myArray = [1 , 2 , 3 , 4 , 5];
+    var [a , b , , c , d] = myArray;
+    console.log("Array shorthand: " + a + " , " + b + " , " + c + " , " + d);
+
+    [a , b] = [b , a];
+    console.log("Swap: " + a + " , " + b);
+
+    var myObject = {
+        name: "Unikys",
+        gender: "Male",
+        job: "Programmer"
+    };
+
+    var {name, gender, job} = myObject;
+    console.log("Object shorthand: " + name + " , " + gender + " , " + job);
+
+    var vehicles = {
+        fourWheeles: {
+            cars: [
+                "SUV",
+                "Sedan"
+            ],
+            trucks: [
+                "Pullover",
+                "Wagen"
+            ]
+        },
+        twoWheeles: [
+            "bicycle",
+            "motorcycle"
+        ]
+    };
+
+    var {fourWheeles, twoWheeles, fourWheeles: {cars, trucks}} = vehicles;
+    console.log("Deep object: "+ fourWheeles +", "+ twoWheeles +", "+ cars +", " + trucks);
+})();
+</script>

@@ -1,0 +1,22 @@
+<html>
+<body>
+    <lable>Name: <input id="name"></label>
+    <pre id="greetings"></pre>
+    <pre id="greetingsES5"></pre>
+    <script>
+    (() => {
+        let inputName = document.getElementById("name"),
+            preGreetings = document.getElementById("greetings"),
+            preGreetingsES5 = document.getElementById("greetingsES5");
+
+        inputName.addEventListener("change", () => { preGreetings.innerHTML = `Hello,
+${inputName.value.toUpperCase()}\nWelcome to ES6`;
+
+        preGreetingsES5.innerHTML = "Hello,\n" +
+            inputName.value.toUpperCase() +
+            "\nI'm using ES5";
+        });
+    })();
+    </script>
+</body>
+</html>

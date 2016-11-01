@@ -1,0 +1,17 @@
+
+<html>
+<body>
+    <lable>Name: <input id="name"></label>
+    <div id="greetings"></div>
+    <script>
+    (() => {
+        let inputName = document.getElementById("name"),
+            divGreetings = document.getElementById("greetings");
+
+        inputName.addEventListener("change", () => {
+            divGreetings.innerHTML = `Hello, ${inputName.value.toUpperCase()}`;
+        });
+    })();
+    </script>
+</body>
+</html>

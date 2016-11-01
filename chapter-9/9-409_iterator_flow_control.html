@@ -1,0 +1,33 @@
+<script>
+(() => {
+    function getDOM() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("/fetchDOM");
+        xhr.onload = function () {
+            xhrRequests.next(xhr.responseText);
+        }
+        xhr.send();
+    }
+
+    function getData() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("/fetchData");
+        xhr.onload = function () {
+            xhrRequests.next(xhr.responseText);
+        }
+        xhr.send();
+    }
+
+    function manipulateDOM(dom, data) {
+        // Fix DOM
+    }
+
+    var xhrRequests = function* () {
+        var dom, data;
+        dom = yield getDOM();
+        data = yield getData();
+        yield manipulateDOM(dom, data);
+    };
+})();
+</script>
+

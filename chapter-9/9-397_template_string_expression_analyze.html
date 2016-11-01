@@ -1,0 +1,16 @@
+
+<script>
+(() => {
+    function analyze(strings, ...values) {
+        console.log(strings); console.log(values);
+        console.log(strings.raw[1] === "!\\nECMAScript"); // === true
+        return "Conditional string";
+    }
+
+    var name = "World";
+    console.log(analyze `Hello, ${name}!\nECMAScript${2 * 2 + 2} is easy`);
+
+
+    console.log(String.raw `Hello, ${name}!\nECMAScript${2 * 2 + 2} is easy`);
+})();
+</script>
