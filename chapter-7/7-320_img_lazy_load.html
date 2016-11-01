@@ -1,0 +1,36 @@
+
+<html>
+<body>
+    <img width="640" height="480" class="lazyload" data-src="/large_image.jpg" />
+    <img width="64" height="64" class="lazyload" data-src="/not_important_image.jpg" />
+
+    <script>
+    (function () {
+        var previousOnload;
+        if (window.addEventListener) {
+            window.addEventListener("load", lazyloadImages); 
+        } else if (window.attachEvent) {
+            window.attachEvent("onload", lazyloadImages);
+        } else if (window.onload) {
+            previousOnload = window.onload; window.onload = function () {
+                previousOnload.call();
+                lazyloadImages();
+            }
+        } else {
+            window.onload = lazyloadImages; // this can be overwritten by another JS
+        }
+
+        function lazyloadImages() {
+            var imgList = document.getElementsByClassName("lazyload"),
+                length = imgList.length,
+                i;
+
+            for ( i = 0 ; i < length ; i++ ) {
+                imgList[i].src = imgList[i].getAttribute("data-src");
+            }
+        }
+    }());
+    </script>
+</body>
+</html>
+

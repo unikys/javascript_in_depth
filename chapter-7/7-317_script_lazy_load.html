@@ -1,0 +1,34 @@
+
+<script>
+(function () {
+    var previousOnload;
+
+    if (window.addEventListener) {
+        window.addEventListener("load", lazyload);
+    } else if (window.attachEvent) {
+        window.attachEvent("onload", lazyload);
+    } else if (window.onload) {
+        previousOnload = window.onload;
+        window.onload = function () {
+            previousOnload.call();
+            lazyload();
+        }
+    } else {
+        window.onload = lazyload; // this can be overwritten by another JS
+    }
+
+    function lazyload() {
+        var scriptTag = document.createElement("script"),
+            headTag = document.getElementsByTagName("head")[0];
+        scriptTag.setAttribute("src", "./sleep.js");
+        scriptTag.setAttribute("type", "text/javascript");
+        scriptTag.setAttribute("async", "true");
+
+        // way around if there is no head tag
+        if (!headTag) {
+            headTag = document.getElementsByTagName("script")[0].parentNode;
+        }
+        headTag.appendChild(scriptTag);
+    }
+}());
+</script>

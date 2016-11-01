@@ -1,0 +1,53 @@
+
+<html>
+<head>
+    <style>
+    .lazyload {
+        background-image: url("./loading.gif");
+        background-size: 64px 64px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    </style>
+</head>
+<body>
+    <img width="480" height="320" class="lazyload" data-src="./large_image.jpg" />
+    <img width="64" height="64" class="lazyload" data-src="./not_important_image.jpg" />
+    <script>
+(function () {
+    var previousOnload;
+    if (window.addEventListener) {
+        window.addEventListener("load", lazyloadImages);
+    } else if (window.attachEvent) {
+        window.attachEvent("onload", lazyloadImages);
+    } else if (window.onload) {
+        previousOnload = window.onload;
+        window.onload = function () {
+            previousOnload.call();
+            lazyloadImages();
+        }
+    } else {
+        window.onload = lazyloadImages; // this can be overwritten by another JS
+    }
+
+    function lazyloadImages() {
+        var imgList = document.getElementsByClassName("lazyload"),
+            length = imgList.length,
+            i;
+
+        for ( i = 0 ; i < length ; i++ ) {
+            (function (imgTag) {
+                var imgBackground = document.createElement("img");
+                imgBackground.setAttribute("src", imgTag.getAttribute("data-src"));
+                imgBackground.setAttribute("width", imgTag.getAttribute("width"));
+                imgBackground.setAttribute("height", imgTag.getAttribute("height"));
+                imgBackground.onload = function () {
+                    imgTag.parentNode.replaceChild(imgBackground, imgTag);
+                };
+            }(imgList[i]));
+        }
+    }
+}()); </script>
+</body>
+</html>
+
